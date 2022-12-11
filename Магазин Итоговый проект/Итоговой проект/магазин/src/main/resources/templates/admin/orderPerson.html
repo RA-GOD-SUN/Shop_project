@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Заказы:</title>
+</head>
+<body>
+
+<form method="get" th:action="@{/admin/}">
+    <input type="submit" value="Вернуться в личный кабинет">
+</form>
+<br>
+<br>
+<h3 style="font-weight: bold; font-size: 30px; color: #259376; text-align: center">Заказы: </h3>
+<form th:method="post" th:action="@{/admin/orderList/search}">
+    <fieldset>
+        <legend><span style="font-size: 21px; font-weight: bold">Введите значение</span></legend>
+        <br>
+        <br>
+        <label for="search">Поиск по номеру заказа:</label>
+        <br>
+        <input type=search" name="search" th:value="*{value_search}" id="search">
+        <br>
+        <br>
+        <input type="submit" value="Найти"
+    </fieldset>
+</form>
+<form method="POST" th:action="@{/admin/order/Cansel/{id}(id=${order.getId()})}"  th:each="order : ${orders}">
+<div >
+    <h3 th:text="'Заказ № ' + ${order.getNumber()}"></h3>
+    <p th:text="'Логин пользователя: ' + ${order.getPerson().getLogin()}"></p>
+    <p th:text="'Имя пользователя: ' + ${order.getPerson().getFirstname()}"></p>
+    <img th:src="'/img/' + ${order.getProduct().imageList[0].getFileName()}" width="300px">
+    <p th:text="'Наименование: ' + ${order.getProduct().getTitle()}"></p>
+    <p th:text="'Количество: ' + ${order.getCount()}"></p>
+    <p th:text="'Цена: ' + ${order.getPrice()}"></p>
+    <p th:text="'Дата заказа: ' + ${#temporals.format(order.getDateTime(), 'dd-MMM-yyyy')}"></p>
+    <p th:text="'Статус: ' + ${order.getStatus()}"></p>
+    <button type="submit" th:disabled="${order.getStatus() eq T(com.example.springsecurityapplication.enumm.Status).values()[4]? true : false}">Отменить заказ</button>
+    <hr>
+</div>
+</form>
+</body>
+</html>

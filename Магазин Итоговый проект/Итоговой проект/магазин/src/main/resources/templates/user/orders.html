@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Заказы</title>
+</head>
+<body>
+<form>
+    <input type="button" value="Вернуться в личный кабинет" onclick="history.back()">
+</form>
+<br>
+<br>
+<h3>Заказы</h3>
+
+<form method="POST" th:action="@{/orderCansel/{id}(id=${order.getId()})}"  th:each="order : ${orders}">
+<div th:each="order : ${orders}">
+    <h3 th:text="'Заказ № ' + ${order.getNumber()}"></h3>
+    <img th:src="'/img/' + ${order.getProduct().imageList[0].getFileName()}" width="300px">
+    <p th:text="'Наименование: ' + ${order.getProduct().getTitle()}"></p>
+    <p th:text="'Количество: ' + ${order.getCount()}"></p>
+    <p th:text="'Цена: ' + ${order.getPrice()}"></p>
+    <p th:text="'Дата заказа: ' + ${#temporals.format(order.getDateTime(), 'dd-MMM-yyyy')}"></p>
+    <p th:text="'Статус: ' + ${order.getStatus()}"></p>
+    <button type="submit" th:disabled="${order.getStatus() eq T(com.example.springsecurityapplication.enumm.Status).values()[4]? true : false}">Отменить</button>
+
+    <hr>
+
+</div>
+</form>
+</body>
+</html>

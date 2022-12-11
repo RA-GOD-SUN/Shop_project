@@ -1,0 +1,45 @@
+header{
+    background-color: #c79fef;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    box-shadow: 1px 1px 6px black;
+    margin: 0px 3px;
+    border-radius: 5px;
+
+}
+#btn-product{
+    box-shadow: 1px 1px 6px black;
+    margin: -3px 25px;
+    border-radius: 5px;
+    background-color:#ded5fb;
+}
+#btn-product:hover {
+    color: #5469d4;
+}
+#exit-start {
+    margin: 0px -500px 0px 620px;
+    border-radius: 13px;
+}
+
+#form{
+    box-shadow: 1px 1px 6px black;
+    margin: 5px 50px;
+    border-radius: 5px;
+    background-color: #ded5fb;
+}
+.text{
+    word-break: normal;
+    /*line-break: strict;*/
+
+}
+#addCart{
+    box-shadow: 1px 1px 6px black;
+    margin: 5px 0px;
+    padding: 3px;
+    border-radius: 5px;
+    background-color:#a68ef5;
+}
+#addCart:hover{
+    color: #5469d4;
+}
+

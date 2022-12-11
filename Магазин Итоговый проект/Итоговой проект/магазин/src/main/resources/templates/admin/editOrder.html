@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<!--suppress ThymeleafVariablesResolveInspection -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактирование заказа</title>
+</head>
+<body>
+<form>
+    <input type="button" value="Вернуться к списку пользователей" onclick="history.back()">
+</form>
+<h3>Изменение статуса заказа:</h3>
+<form method="POST" th:action="@{/admin/order/edit/{id}(id=${orders.getId()})}" th:object="${orders}">
+
+
+    <label for="number">Номер заказа: </label>
+    <input type="text"  th:field="*{number}" placeholder="Введите пароль" name="number" id="number">
+    <div style="color: red" th:if="${#fields.hasErrors('number')}" th:errors="*{number}"></div>
+    <br>
+    <label for="person">Пользователь id: </label>
+    <input type="text"  th:field="*{person}" placeholder="Пользователь" name="person" id="person">
+    <div style="color: red" th:if="${#fields.hasErrors('person')}" th:errors="*{person}"></div>
+    <br>
+
+    <label for="product">Товар id: </label>
+    <input type="text" th:field="*{product}" id="product">
+    <div style="color: red" th:if="${#fields.hasErrors('product')}" th:errors="*{product}"></div>
+    <br>
+
+    <label for="сount">Кол-во: </label>
+    <input type="text" th:field="*{сount}" placeholder="Кол-во" id="сount">
+    <div style="color: red" th:if="${#fields.hasErrors('сount')}" th:errors="*{сount}"></div>
+    <br>
+    <br>
+
+    <label for="price">Введите цену: </label>
+    <input type="number" th:field="*{price}" min="1" step="0.00" id="price">
+    <div style="color: red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>
+    <br>
+    <br>
+
+    <label for="DateTime">DateTime: </label>
+    <input type="text" th:field="*{DateTime}" placeholder="DateTime" id="DateTime">
+    <div style="color: red" th:if="${#fields.hasErrors('DateTime')}" th:errors="*{DateTime}"></div>
+    <br>
+    <br>
+    <label for="status">Выберите статус товара: </label>
+    <select name="status" th:field="*{status}" id="status">
+        <div th:each="element : ${status}">
+            <option th:text="${element.getStatus()}" th:value="${element.getStatus()}"></option>
+        </div>
+    </select>
+    <input type="submit" value="Редактировать">
+</form>
+</body>
+</html>
