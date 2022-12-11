@@ -1,5 +1,6 @@
 package com.example.springsecurityapplication.controllers;
 
+import com.example.springsecurityapplication.enumm.Status;
 import com.example.springsecurityapplication.models.Image;
 import com.example.springsecurityapplication.models.Order;
 import com.example.springsecurityapplication.models.Person;
@@ -296,7 +297,7 @@ public String ordersUsers(Model model){
 
 //поиск по номеру заказа
     @PostMapping("/orderList/search")
-    public String orderNumberSearch(@RequestParam("search") String search, Model model){
+    public String orderNumberSearch(@RequestParam("search") String search, @RequestParam("status") String status, Model model){
         if(search.length()>4){
             search = search.substring(search.length() - 4);
         }
@@ -305,20 +306,56 @@ public String ordersUsers(Model model){
     }
 
 //метод по отмене заказа
-    @PostMapping("/order/Cansel/{id}")
+    @GetMapping("/order/Cansel/{id}")
     public String updateOrderCansel(@ModelAttribute("orders") Order order, @PathVariable("id") int id){
         Order order_status = orderService.getOrderById(id);
         orderService.updateOrderCansel(order_status);
-        return "/admin/orderPerson";
+        return "redirect:/admin/ordersUsers";
     }
 
-    //    @Query
-//    @PostMapping("/search")
-//    public String productSearch(@RequestParam("status") String status, Model model){
-//       if(!status.equals("Отменён")){
-//           model.addAttribute("orders", orderService.getAllOrder());}
-//       return "/admin/orderPerson";
-//       }
+    //метод заказ принят
+    @GetMapping("/order/Accept/{id}")
+    public String updateOrderAccept(@ModelAttribute("orders") Order order, @PathVariable("id") int id){
+        Order order_status = orderService.getOrderById(id);
+        orderService.updateOrderAccept(order_status);
+        return "redirect:/admin/ordersUsers";
+    }
+    //метод заказ оформлен
+    @GetMapping("/order/Register/{id}")
+    public String updateOrderRegister(@ModelAttribute("orders") Order order, @PathVariable("id") int id){
+        Order order_status = orderService.getOrderById(id);
+        orderService.updateOrderRegister(order_status);
+        return "redirect:/admin/ordersUsers";
+    }
+
+    //метод заказ ожидает
+    @GetMapping("/order/Expect/{id}")
+    public String updateOrderExpect(@ModelAttribute("orders") Order order, @PathVariable("id") int id){
+        Order order_status = orderService.getOrderById(id);
+        orderService.updateOrderExpect(order_status);
+        return "redirect:/admin/ordersUsers";
+    }
+
+    //метод заказ Получен
+    @GetMapping("/order/Get/{id}")
+    public String updateOrderGet(@ModelAttribute("orders") Order order, @PathVariable("id") int id){
+        Order order_status = orderService.getOrderById(id);
+        orderService.updateOrderGet(order_status);
+        return "redirect:/admin/ordersUsers";
+    }
+
+//    @PostMapping("/order/Cansel/{id}")
+//    public String updateOrderCansel(@ModelAttribute("orders") Order order, @PathVariable("id") int id, @RequestParam(value="status") int status){
+//        Order order_status = orderService.getOrderById(id);
+//
+//        if(order_status.equals(Status.Отменен)) {
+//            orderService.updateOrderCansel(order_status);
+//        }
+//        else if(order_status.equals(Status.Принят)){
+//            orderService.updateOrderAccept(order_status);
+//        }
+//        return "redirect:/admin/ordersUsers";
+//    }
 
 }
 

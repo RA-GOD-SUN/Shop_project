@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!--suppress ThymeleafVariablesResolveInspection -->
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -19,13 +20,17 @@
         <br>
         <label for="search">Поиск по номеру заказа:</label>
         <br>
-        <input type=search" name="search" th:value="*{value_search}" id="search">
+        <input type="search" name="search" th:value="*{value_search}" id="search">
         <br>
         <br>
-        <input type="submit" value="Найти"
+        <input type="submit" value="Найти">
     </fieldset>
 </form>
-<form method="POST" th:action="@{/admin/order/Cansel/{id}(id=${order.getId()})}"  th:each="order : ${orders}">
+
+<h3>Заказы:</h3>
+<article th:each="order : ${orders}">
+<!--<form method="POST" th:action="@{/admin/order/Accept/{id}(id=${order.getId()})}"  th:each="order : ${orders}">-->
+<!--<form method="POST" th:action="@{/admin/order/Cansel/{id}(id=${order.getId()})}"  th:each="order : ${orders}">-->
 <div >
     <h3 th:text="'Заказ № ' + ${order.getNumber()}"></h3>
     <p th:text="'Логин пользователя: ' + ${order.getPerson().getLogin()}"></p>
@@ -36,9 +41,17 @@
     <p th:text="'Цена: ' + ${order.getPrice()}"></p>
     <p th:text="'Дата заказа: ' + ${#temporals.format(order.getDateTime(), 'dd-MMM-yyyy')}"></p>
     <p th:text="'Статус: ' + ${order.getStatus()}"></p>
-    <button type="submit" th:disabled="${order.getStatus() eq T(com.example.springsecurityapplication.enumm.Status).values()[4]? true : false}">Отменить заказ</button>
+<!--    <button type="submit" th:disabled="${order.getStatus() eq T(com.example.springsecurityapplication.enumm.Status).values()[4]? true : false}">Отменить заказ</button>-->
+<!--    <button type="submit" th:disabled="${order.getStatus() eq T(com.example.springsecurityapplication.enumm.Status).values()[0]? true : false}">Принять заказ</button>-->
+    <a th:href="@{/admin/order/Cansel/{id}(id=${order.getId()})}"><button type="button" ><span class="span">Отменён</span></button></a>
+    <a th:href="@{/admin/order/Accept/{id}(id=${order.getId()})}"><button type="button" ><span class="span">Принят</span></button></a>
+    <a th:href="@{/admin/order/Register/{id}(id=${order.getId()})}"><button type="button" ><span class="span">Оформлен</span></button></a>
+    <a th:href="@{/admin/order/Expect/{id}(id=${order.getId()})}"><button type="button" ><span class="span">Ожидает</span></button></a>
+    <a th:href="@{/admin/order/Get/{id}(id=${order.getId()})}"><button type="button" ><span class="span">Получен</span></button></a>
     <hr>
 </div>
-</form>
+</article>
+
+
 </body>
 </html>

@@ -33,10 +33,11 @@ public class OrderService {
 
     // Данный метод позволяет обновить данные Заказа
     @Transactional
-    public void updateOrder(int id, Order order ){
+    public void updateOrder(int id,Order order ){
         order.setId(id);
         orderRepository.save(order);
     }
+
 
     // Данный метод позволяет обновить инфо о заказе отменён
     @Transactional
@@ -51,30 +52,32 @@ public class OrderService {
         return orders;
     }
 
-//    // Данный метод позволяет обновить инфо о заказе принят
-//    @Transactional
-//    public void updateOrderAccept(Order order ){
-//        order.setStatus(Status.Принят);
-//        orderRepository.save(order);
-//    }
-//    // Данный метод позволяет обновить инфо о заказе Оформлен
-//    @Transactional
-//    public void updateOrderRegister(Order order ){
-//        order.setStatus(Status.Оформлен);
-//        orderRepository.save(order);
-//    }
-//    // Данный метод позволяет обновить инфо о заказе Ожидает
-//    @Transactional
-//    public void updateOrderExpect(Order order ){
-//        order.setStatus(Status.Ожидает);
-//        orderRepository.save(order);
-//    }
-//    // Данный метод позволяет обновить инфо о заказе Получен
-//    @Transactional
-//    public void updateOrderGet(Order order ){
-//        order.setStatus(Status.Получен);
-//        orderRepository.save(order);
-//    }
+    // Данный метод позволяет обновить инфо о заказе принят
+    @Transactional
+    public void updateOrderAccept(Order order ){
+        order.setStatus(Status.Принят);
+        orderRepository.save(order);
+    }
+    // Данный метод позволяет обновить инфо о заказе Оформлен
+    @Transactional
+    public void updateOrderRegister(Order order ){
+        order.setStatus(Status.Оформлен);
+        orderRepository.save(order);
+    }
+    // Данный метод позволяет обновить инфо о заказе Ожидает
+    @Transactional
+    public void updateOrderExpect(Order order ){
+        order.setStatus(Status.Ожидает);
+        orderRepository.save(order);
+    }
+    // Данный метод позволяет обновить инфо о заказе Получен
+    @Transactional
+    public void updateOrderGet(Order order ){
+        order.setStatus(Status.Получен);
+        orderRepository.save(order);
+    }
 
 
+
+//
 }
