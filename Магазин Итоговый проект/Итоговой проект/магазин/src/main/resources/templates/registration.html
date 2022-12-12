@@ -33,7 +33,7 @@
   <input type="text" th:field="*{patronymic}" id="patronymic">
   <br>
   <label for="birthday">Введите возраст: </label>
-  <input type="text" th:field="*{birthday}" placeholder="01.01.1900" id="birthday">
+  <input type="date" th:field="*{birthday}" placeholder="01.01.1900" id="birthday">
   <div style="color: red" th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}"></div>
   <br>
   <label for="email">Введите email: </label>

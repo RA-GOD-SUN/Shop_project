@@ -344,18 +344,7 @@ public String ordersUsers(Model model){
         return "redirect:/admin/ordersUsers";
     }
 
-//    @PostMapping("/order/Cansel/{id}")
-//    public String updateOrderCansel(@ModelAttribute("orders") Order order, @PathVariable("id") int id, @RequestParam(value="status") int status){
-//        Order order_status = orderService.getOrderById(id);
-//
-//        if(order_status.equals(Status.Отменен)) {
-//            orderService.updateOrderCansel(order_status);
-//        }
-//        else if(order_status.equals(Status.Принят)){
-//            orderService.updateOrderAccept(order_status);
-//        }
-//        return "redirect:/admin/ordersUsers";
-//    }
+
 
 }
 

@@ -3,24 +3,32 @@ package com.example.springsecurityapplication.controllers;
 import com.example.springsecurityapplication.enumm.Status;
 import com.example.springsecurityapplication.models.Cart;
 import com.example.springsecurityapplication.models.Order;
+import com.example.springsecurityapplication.models.Person;
 import com.example.springsecurityapplication.models.Product;
 import com.example.springsecurityapplication.repositories.CartRepository;
 import com.example.springsecurityapplication.repositories.OrderRepository;
 import com.example.springsecurityapplication.repositories.ProductRepository;
 import com.example.springsecurityapplication.security.PersonDetails;
 import com.example.springsecurityapplication.services.OrderService;
+import com.example.springsecurityapplication.services.PersonService;
 import com.example.springsecurityapplication.services.ProductService;
+import com.example.springsecurityapplication.util.PersonValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+@SuppressWarnings("MVCPathVariableInspection")
+//@RequestMapping("/user")
 @Controller
 
 public class UserController {
@@ -31,15 +39,20 @@ public class UserController {
     private final ProductService productService;
     private final OrderService orderService;
     private final ProductRepository productRepository;
+    private final PersonService personService;
+
+    private final PersonValidator personValidator;
 
     @Autowired
-    public UserController(OrderRepository orderRepository, CartRepository cartRepository, ProductService productService,
-                          OrderService orderService, ProductRepository productRepository) {
+    public UserController(PersonValidator personValidator, OrderRepository orderRepository, CartRepository cartRepository, ProductService productService,
+                          OrderService orderService, ProductRepository productRepository, PersonService personService) {
         this.orderRepository = orderRepository;
         this.cartRepository = cartRepository;
         this.productService = productService;
         this.orderService = orderService;
         this.productRepository = productRepository;
+        this.personService = personService;
+        this.personValidator = personValidator;
     }
 
 
@@ -227,5 +240,88 @@ public class UserController {
         model.addAttribute("value_price_do", Do);
         model.addAttribute("products", productService.getAllProduct());
         return "/user/index";
+    }
+//смена пользовательского пароля
+    @GetMapping("/password/change")
+    public String changePassword(Model model){
+        model.addAttribute("person", new Person());
+        return "/user/rePassword";
+    }
+
+    @PostMapping("/password/change")
+    public String changePassword(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult){
+
+        personValidator.findUser(person, bindingResult);
+        if(bindingResult.hasErrors()){
+            return "/user/rePassword";
+        }
+
+        Person person_db = personService.getPersonFindByLogin(person);
+
+        int id = person_db.getId();
+        String password = person.getPassword();
+        personService.changePassword(id, password);
+
+        return "redirect:/index";
+    }
+//maxs
+//    @GetMapping("/user/password/user")
+//    public String changePasswordPersonal(Model model){
+//        model.addAttribute("person", new Person());
+//        model.addAttribute("login", SecurityContextHolder.getContext().getAuthentication().getName());
+//        return "user/rePassword";
+//    }
+//
+//    @PostMapping("/user/password/user")
+//    public String changePasswordPersonal(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult, Model model){
+//        personValidator.findUser(person, bindingResult);
+//        if(bindingResult.hasErrors()){
+//            model.addAttribute("login", SecurityContextHolder.getContext().getAuthentication().getName());
+//            return "user/rePassword";
+//        }
+//
+//        Person person_db = personService.getPersonFindByLogin(person);
+//        int id = person_db.getId();
+//        String password = person.getPassword();
+//        personService.changePassword(id, password);
+//
+//        return "redirect:/index";
+//    }
+
+//    @GetMapping("/user/updatePassword")
+////    @PreAuthorize("hasRole('READ_PRIVILEGE')")
+//    public String changeUserPassword(Model model) {
+//        model.addAttribute("persons", new Person());
+//        return "/user/updatePassword";
+//    }
+//    @PostMapping("/user/updatePassword")
+//    @PreAuthorize("hasRole('READ_PRIVILEGE')")
+//    public String updatePassword(@ModelAttribute("person")  Person person, BindingResult bindingResult){
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        PersonDetails personDetails = (PersonDetails) authentication.getPrincipal();
+//        int id_person = personDetails.getPerson().getId();
+//        Person person_db = personService.getPersonFindByLogin(person);
+//        int id = person_db.getId().getPassword();
+//     //   String password= person.getPassword();
+//        personService.updatePassword(id,password);
+//        return "redirect:/user/updatePassword";
+//    }
+
+    // Метод возвращает страницу с формой редактирования пользователя и помещает в модель объект редактируемого пользователя по id
+    @GetMapping("/updatePassword/")
+    public String editPerson(@PathVariable("id")int id, Model model){
+       model.addAttribute("editPersons", personService.getPersonById(id));
+        //      model.addAttribute("passwords", personService.getPasswordById(password));
+        return "user/updatePassword";
+    }
+
+    // Метод принимает объект с формы и обновляет пользователя
+    @PostMapping("/updatePassword/")
+    public String editPerson(@ModelAttribute("editPersons") @Valid Person person, BindingResult bindingResult, @PathVariable("id") int id){
+        if(bindingResult.hasErrors()){
+            return "/user/updatePassword";
+        }
+        personService.updatePassword(id, person);
+        return "redirect:/index";
     }
 }

@@ -7,6 +7,7 @@ import com.example.springsecurityapplication.services.PersonService;
 import com.example.springsecurityapplication.services.ProductService;
 import com.example.springsecurityapplication.util.PersonValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -56,22 +57,7 @@ public class AuthController {
 
     ///////////////////////////////////////////////смена пароля//////////////////////////////////////////////////////////
 
-//    @GetMapping("/updatePassword")
-//    @PreAuthorize("hasRole('READ_PRIVILEGE')")
-//    public String changeUserPassword(Model model) {
-//        model.addAttribute("person", new Person());
-//        return "updatePassword";
-//    }
-//    @PostMapping("/updatePassword")
-//    @PreAuthorize("hasRole('READ_PRIVILEGE')")
-//    public String updatePassword(@ModelAttribute("person")  Person person, BindingResult bindingResult){
-//        Person person_db = personService.getPersonFindByLogin(person);
-//        int id = person_db.getId();
-//        String password= person.getPassword();
-//
-//        personService.updatePassword(id,password);
-//        return "redirect:/index";
-//    }
+
 //
 //    public ProductService getProductService() {
 //        return productService;

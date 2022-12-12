@@ -46,6 +46,12 @@ public class PersonService {
         Optional<Person> optionalPerson = personRepository.findById(id);
         return optionalPerson.orElse(null);
     }
+    // Данный метод позволяет получить пароль пользователя по id
+    public Person getPasswordById( String password){
+        Optional<Person> optionalPerson = personRepository.findByPassword( password);
+        return optionalPerson.orElse(null);
+    }
+
 
     //    // Данный метод позволяет сохранить пользователя
 //    @Transactional
@@ -54,15 +60,20 @@ public class PersonService {
 //    }
 //
 //
-// Данный метод позволяет обновить пароль пользователя
+
+    // Данный метод позволяет обновить данные пользователя пароль
     @Transactional
-    public void updatePassword(int id, String password){
-        personRepository.updatePersonById(id,passwordEncoder.encode(password));
+    public void updatePassword(int id, Person person){
+        person.setId(id);
+        person.setPassword(passwordEncoder.encode(person.getPassword()));
+        personRepository.save(person);
     }
+
     // Данный метод позволяет обновить данные пользователя
     @Transactional
     public void updatePerson(int id, Person person){
         person.setId(id);
+        person.setPassword(passwordEncoder.encode(person.getPassword()));
         personRepository.save(person);
     }
 
@@ -104,8 +115,8 @@ public class PersonService {
         return false;
     }
 
-    public Person changeUserPassword(Person person, String password) {
-        Optional<Person> optionalPersons = personRepository.findByPassword(password);
-        return optionalPersons.orElse(null);
+    @Transactional
+    public void changePassword(int id, String password){
+        personRepository.updatePersonById(id, passwordEncoder.encode(password));
     }
 }

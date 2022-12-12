@@ -26,11 +26,16 @@ public interface PersonRepository extends JpaRepository<Person, Integer> {
     // Запрос на получение пользователей по фамилии, где первые буквы начинаються с определенной последовательности
     Optional<Person> findByLastnameStartingWith(String starting_with);
 
-    Optional<Person> findByPassword(String password);
+    //метод на получение пароля пользователя
+    Optional<Person> findByPassword( String password);
 
-    //запрос для обновления пароля при смене
     @Modifying
-    @Query(value = "UPDATE person set password = ?2 where id=?1", nativeQuery = true)
+    @Query(value = "UPDATE person SET password = ?2 WHERE id= ?1", nativeQuery = true)
     void updatePersonById(int id, String password);
+
+//    //запрос для обновления пароля при смене
+//    @Modifying
+//    @Query(value = "UPDATE person set password = ?2 where id=?1", nativeQuery = true)
+//    void updatePersonById(int id, String password);
 
 }
