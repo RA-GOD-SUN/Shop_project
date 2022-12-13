@@ -9,9 +9,11 @@ import org.springframework.validation.Validator;
 @Component
 public class PersonValidator implements Validator {
     private final PersonService personService;
+//    private final String oldPassword;
 
     public PersonValidator(PersonService personService) {
         this.personService = personService;
+//        this.oldPassword = String.valueOf(oldPassword);
     }
 
     // В данно методе указываем для какой модели предназначен данный валидатор
@@ -31,9 +33,12 @@ public class PersonValidator implements Validator {
 
     public void findUser(Object target, Errors errors) {
         Person person = (Person) target;
-        // Если метод по поиску пользователя по логину равен 0 тогда такой логин не найден
+        // Если метод по поиску пользователя по логину если равен 0 тогда такой логин не найден
         if(personService.getPersonFindByLogin(person) == null){
-            errors.rejectValue("login", "", "Пользователь c таким логином не найден.");
+            errors.rejectValue("login", "", "Логин не найден");
         }
+        else System.out.println("Логин верный");
     }
+
+
 }

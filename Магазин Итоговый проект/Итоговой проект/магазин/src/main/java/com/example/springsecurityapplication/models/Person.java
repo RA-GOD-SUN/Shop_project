@@ -23,6 +23,8 @@ public class Person {
     @Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\\s).*$", message = "Пароль должен содержать не менее 6 символов, хотя бы одну цифру, спец символ, букву в верхнем и нижнем регистре ")
     private String password;
 
+
+
     @Column(name = "role")
     private String role;
 

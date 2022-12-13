@@ -8,13 +8,11 @@ import com.example.springsecurityapplication.services.ProductService;
 import com.example.springsecurityapplication.util.PersonValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -58,8 +56,29 @@ public class AuthController {
     ///////////////////////////////////////////////смена пароля//////////////////////////////////////////////////////////
 
 
-//
-//    public ProductService getProductService() {
-//        return productService;
-//    }
+    @GetMapping("/password/changepersonal")
+    public String changePasswordPersonal(Model model){
+        model.addAttribute("person", new Person());
+        model.addAttribute("login", SecurityContextHolder.getContext().getAuthentication().getName());
+        return "/user/updatePassword";
+    }
+
+    @PostMapping("/password/changepersonal")
+    public String changePasswordPersonal(@ModelAttribute("person") @Valid Person person,
+                                         BindingResult bindingResult, Model model){
+        personValidator.findUser(person, bindingResult);
+        if(!bindingResult.hasErrors()){
+        System.out.println("Верный логин");}
+        else if(bindingResult.hasErrors()) {
+            model.addAttribute("login", SecurityContextHolder.getContext().getAuthentication().getName());
+            return "/user/updatePassword";
+        }
+        Person person_db = personService.getPersonFindByLogin(person);
+        int id = person_db.getId();
+        String password = person.getPassword();
+        personService.changePassword(id, password);
+        System.out.println("смена пароля успешная");
+        return "redirect:/index";
+    }
+
 }

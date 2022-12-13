@@ -1,3 +1,4 @@
+
 header{
     background-color: #c79fef;
     padding-top: 20px;
@@ -13,21 +14,26 @@ header{
     border-radius: 5px;
     background-color:#ded5fb;
 }
-#exit{
-    margin: 0px -500px 0px 0px;
-    border-radius: 13px;
 
-}
 #cart{
     border-radius: 13px;
-    margin: 0px -210px 0px 390px;
+    margin: 0px -5px 0px 0px;
 
 }
 #orders{
     border-radius: 13px;
-    margin: 0px -70px 0px 100px;
+    margin: 0px -70px 0px 0px;
 
 }
+#password{
+    border-radius: 13px;
+    margin: 0px -50px 0px 0px;
+}
+#exit{
+     margin: 0px 10px 0px 0px;
+     border-radius: 13px;
+
+ }
 #btn-product:hover {
     color: #5469d4;
 }

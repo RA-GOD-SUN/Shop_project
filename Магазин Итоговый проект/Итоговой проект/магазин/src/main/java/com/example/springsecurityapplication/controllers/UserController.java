@@ -7,6 +7,7 @@ import com.example.springsecurityapplication.models.Person;
 import com.example.springsecurityapplication.models.Product;
 import com.example.springsecurityapplication.repositories.CartRepository;
 import com.example.springsecurityapplication.repositories.OrderRepository;
+import com.example.springsecurityapplication.repositories.PersonRepository;
 import com.example.springsecurityapplication.repositories.ProductRepository;
 import com.example.springsecurityapplication.security.PersonDetails;
 import com.example.springsecurityapplication.services.OrderService;
@@ -42,9 +43,10 @@ public class UserController {
     private final PersonService personService;
 
     private final PersonValidator personValidator;
+    private final PersonRepository personRepository;
 
     @Autowired
-    public UserController(PersonValidator personValidator, OrderRepository orderRepository, CartRepository cartRepository, ProductService productService,
+    public UserController(PersonRepository personRepository, PersonValidator personValidator, OrderRepository orderRepository, CartRepository cartRepository, ProductService productService,
                           OrderService orderService, ProductRepository productRepository, PersonService personService) {
         this.orderRepository = orderRepository;
         this.cartRepository = cartRepository;
@@ -53,6 +55,7 @@ public class UserController {
         this.productRepository = productRepository;
         this.personService = personService;
         this.personValidator = personValidator;
+        this.personRepository = personRepository;
     }
 
 
@@ -307,21 +310,23 @@ public class UserController {
 //        return "redirect:/user/updatePassword";
 //    }
 
-    // Метод возвращает страницу с формой редактирования пользователя и помещает в модель объект редактируемого пользователя по id
-    @GetMapping("/updatePassword/")
-    public String editPerson(@PathVariable("id")int id, Model model){
-       model.addAttribute("editPersons", personService.getPersonById(id));
-        //      model.addAttribute("passwords", personService.getPasswordById(password));
-        return "user/updatePassword";
-    }
 
-    // Метод принимает объект с формы и обновляет пользователя
-    @PostMapping("/updatePassword/")
-    public String editPerson(@ModelAttribute("editPersons") @Valid Person person, BindingResult bindingResult, @PathVariable("id") int id){
-        if(bindingResult.hasErrors()){
-            return "/user/updatePassword";
-        }
-        personService.updatePassword(id, person);
-        return "redirect:/index";
-    }
+
+    // Метод возвращает страницу с формой редактирования пользователя и помещает в модель объект редактируемого пользователя по id
+//    @GetMapping("/Password/update/{id}")
+//    public String editPerson(@PathVariable("id")int id, Model model){
+//       model.addAttribute("editPersons", personService.getPersonById(id));
+//        //      model.addAttribute("passwords", personService.getPasswordById(password));
+//        return "user/updatePassword";
+//    }
+//
+//    // Метод принимает объект с формы и обновляет пользователя
+//    @PostMapping("/Password/update/{id}")
+//    public String editPerson(@ModelAttribute("editPersons") @Valid Person person, BindingResult bindingResult, @PathVariable("id") int id){
+//        if(bindingResult.hasErrors()){
+//            return "/user/updatePassword";
+//        }
+//        personService.updatePassword(id, person);
+//        return "redirect:/index";
+//    }
 }

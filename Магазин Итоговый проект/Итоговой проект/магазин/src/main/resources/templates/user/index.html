@@ -9,18 +9,13 @@
     <link th:href="@{/css/ixdexUser.css}" type="text/css" rel="stylesheet">
 </head>
 <body>
+
 <header>
     <div class="container">
         <div class="row">
             <div id="LK" class="col-md-6 text-md-start text-sm-center text-center col-sm-12 col-12">
                 <h1>Shop</h1>
             </div>
-            <div id="cart" class=" col-md-2 col-sm-12 col-12 text-center align-self-center">
-                <form th:href="@{/updatePassword}">
-                    <input id="btn-product" type="submit" value="Сменить пароль">
-                </form>
-            </div>
-<!--            <a th:href="@{/updatePassword}" class="nav-link" aria-current="page">Сменить пароль</a>-->
             <div id="cart" class=" col-md-2 col-sm-12 col-12 text-center align-self-center">
                 <form method="get" th:action="@{/cart}">
                     <input id="btn-product" type="submit" value="Корзина">
@@ -29,6 +24,11 @@
             <div id="orders" class=" col-md-2 col-sm-12 col-12 text-center align-self-center">
                 <form method="get" th:action="@{/orders}">
                     <input id="btn-product" type="submit" value="Заказы">
+                </form>
+            </div>
+            <div id="password" class=" col-md-2 col-sm-12 col-12 text-center align-self-center">
+                <form method="get" th:action="@{/auth/password/changepersonal}">
+                    <input id="btn-product" type="submit" value="Сменить пароль">
                 </form>
             </div>
             <div id="exit"  class=" col-md-2 col-sm-12 col-12 text-center align-self-center">
@@ -123,5 +123,6 @@
     </div>
 </div>
 </div>
+
 </body>
 </html>
