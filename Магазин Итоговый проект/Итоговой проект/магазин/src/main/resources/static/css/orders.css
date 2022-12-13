@@ -3,7 +3,7 @@ header{
     padding-top: 20px;
     padding-bottom: 20px;
     box-shadow: 1px 1px 6px black;
-    margin: 0px 3px;
+    margin: 1px 3px;
     border-radius: 5px;
 
 }
@@ -14,25 +14,25 @@ header{
     background-color:#ded5fb;
 }
 
-#cart{
-    border-radius: 13px;
-    margin: 0px -120px 0px 300px;
-
-}
-#orders{
+.cart{
     border-radius: 13px;
     margin: 0px -60px 0px 100px;
 
 }
+#orders{
+    border-radius: 13px;
+    margin: 0px -40px 0px 0px;
+
+}
 #password{
     border-radius: 13px;
-    margin: 0px -80px 0px 0px;
+    margin: 0px -20px 0px 0px;
 }
 #exit{
-     margin: 0px 0px 0px 0px;
-     border-radius: 13px;
+    margin: 0px 0px 0px 0px;
+    border-radius: 13px;
 
- }
+}
 #btn-product:hover {
     color: #5469d4;
 }

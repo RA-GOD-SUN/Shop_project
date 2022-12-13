@@ -12,26 +12,26 @@
 
 <header>
     <div class="container">
-        <div class="row">
-            <div id="LK" class="col-md-6 text-md-start text-sm-center text-center col-sm-12 col-12">
+        <div class="row col-sm-20 text-md-start text-sm-center text-center">
+            <div id="LK" class="col-md-4 text-md-start text-sm-center text-center col-sm-1 col-1">
                 <h1>Shop</h1>
             </div>
-            <div id="cart" class=" col-md-2 col-sm-8 col-8 text-center align-self-center">
+            <div id="cart" class=" col-2 align-self-center">
                 <form method="get" th:action="@{/cart}">
                     <input id="btn-product" type="submit" value="Корзина">
                 </form>
             </div>
-            <div id="orders" class=" col-md-2 col-sm-12 col-12 text-center align-self-center">
+            <div id="orders" class=" col-2 align-self-center ">
                 <form method="get" th:action="@{/orders}">
                     <input id="btn-product" type="submit" value="Заказы">
                 </form>
             </div>
-            <div id="password" class=" col-md-2 col-sm-12 col-12 text-center align-self-center">
+            <div id="password" class=" col-2 align-self-center ">
                 <form method="get" th:action="@{/auth/password/changepersonal}">
                     <input id="btn-product" type="submit" value="Сменить пароль">
                 </form>
             </div>
-            <div id="exit"  class=" col-md-2 col-sm-12 col-12 text-center align-self-center">
+            <div id="exit"  class=" col-2 align-self-center">
                 <form th:method="POST" th:action="@{/logout}">
                     <input id="btn-product" type="submit" value="Выйти из личного кабинета">
                 </form>

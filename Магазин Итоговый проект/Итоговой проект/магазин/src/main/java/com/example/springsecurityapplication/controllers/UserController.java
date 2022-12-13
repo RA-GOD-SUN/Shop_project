@@ -166,6 +166,8 @@ public class UserController {
         return "/user/orders";
     }
 
+
+
     @PostMapping("/orderCansel/{id}")
     public String updateOrderCansel(@ModelAttribute("orders")  Order order, @PathVariable("id") int id){
         Order order_status = orderService.getOrderById(id);
@@ -244,29 +246,32 @@ public class UserController {
         model.addAttribute("products", productService.getAllProduct());
         return "/user/index";
     }
-//смена пользовательского пароля
-    @GetMapping("/password/change")
-    public String changePassword(Model model){
-        model.addAttribute("person", new Person());
-        return "/user/rePassword";
-    }
+////смена пользовательского пароля
+//    @GetMapping("/password/change")
+//    public String changePassword(Model model){
+//        model.addAttribute("person", new Person());
+//        return "/user/rePassword";
+//    }
+//
+//    @PostMapping("/password/change")
+//    public String changePassword(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult){
+//
+//        personValidator.findUser(person, bindingResult);
+//        if(bindingResult.hasErrors()){
+//            return "/user/rePassword";
+//        }
+//
+//        Person person_db = personService.getPersonFindByLogin(person);
+//
+//        int id = person_db.getId();
+//        String password = person.getPassword();
+//        personService.changePassword(id, password);
+//
+//        return "redirect:/index";
+//    }
 
-    @PostMapping("/password/change")
-    public String changePassword(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult){
 
-        personValidator.findUser(person, bindingResult);
-        if(bindingResult.hasErrors()){
-            return "/user/rePassword";
-        }
 
-        Person person_db = personService.getPersonFindByLogin(person);
-
-        int id = person_db.getId();
-        String password = person.getPassword();
-        personService.changePassword(id, password);
-
-        return "redirect:/index";
-    }
 //maxs
 //    @GetMapping("/user/password/user")
 //    public String changePasswordPersonal(Model model){

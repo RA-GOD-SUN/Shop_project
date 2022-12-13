@@ -46,6 +46,13 @@ public class OrderService {
         orderRepository.save(order);
     }
 
+    // Данный метод позволяет обновить инфо о заказе отменён
+    @Transactional
+    public void orderCansel(Order order){
+        order.setStatus(Status.Отменен);
+        orderRepository.save(order);
+    }
+
     @Transactional
     public List<Order>findByLastFourCharacters(String str){
         List<Order> orders = orderRepository.findByLastFourCharacters(str);

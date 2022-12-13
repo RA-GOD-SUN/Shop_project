@@ -313,6 +313,15 @@ public String ordersUsers(Model model){
         return "redirect:/admin/ordersUsers";
     }
 
+
+    //метод по отмене заказа у пользователя
+    @GetMapping("/order/cansel/{id}")
+    public String orderCansel(@ModelAttribute("orders") Order order, @PathVariable("id") int id){
+        Order order_status = orderService.getOrderById(id);
+        orderService.updateOrderCansel(order_status);
+        return "redirect:/orders";
+    }
+
     //метод заказ принят
     @GetMapping("/order/Accept/{id}")
     public String updateOrderAccept(@ModelAttribute("orders") Order order, @PathVariable("id") int id){
