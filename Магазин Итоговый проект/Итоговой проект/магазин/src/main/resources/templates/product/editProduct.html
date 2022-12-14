@@ -58,7 +58,13 @@
     <label for="seller">Введите данные о продавце: </label>
     <textarea th:field="*{seller}" placeholder="Продавец" id="seller"></textarea>
     <div style="color: red" th:if="${#fields.hasErrors('seller')}" th:errors="*{seller}"></div>
+        <br>
+        <br>
+
+        <p th:text="'Дата последнего изменения:' +${#temporals.format(editProduct.getDateTimeOfCreated(), 'dd MMMMyyyy, HH:mm')}">
+
     </div>
+
     <div class="column">
     <p style="color: red">Вы можете добавить до 5 фотографий. Первая фотография не может быть пустой</p>
     <input type="file" name="file_one">

@@ -17,8 +17,8 @@
             </div>
 
             <div id="exit"  class=" col-md-2 col-sm-12 col-12 text-center align-self-center">
-                <form>
-                    <input id="btn-product" type="button" value="Вернуться назад" onclick="history.back()">
+                <form th:method="get" th:action="@{/admin}">
+                    <input id="btn-product" type="submit" value="Личный кабинет">
                 </form>
             </div>
         </div>

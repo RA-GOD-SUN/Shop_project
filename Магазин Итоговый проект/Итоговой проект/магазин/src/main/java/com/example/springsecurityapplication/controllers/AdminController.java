@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Controller
@@ -217,6 +218,7 @@ public class AdminController {
 
     @PostMapping("/product/edit/{id}")
     public String editProduct(@ModelAttribute("editProduct") Product product, @PathVariable("id") int id){
+        product.setDateTimeOfCreated(LocalDateTime.now());
         productService.updateProduct(id, product);
         return "redirect:/admin";
     }
@@ -251,7 +253,7 @@ public class AdminController {
 //    @PostMapping("/person/edit/{id}")
 //    public String editPerson(@ModelAttribute("editPerson") @Valid Person person,BindingResult bindingResult, @PathVariable("id") int id){
 //        if(bindingResult.hasErrors()){
-//            return "/editPerson";
+//            return "/person/editPerson";
 //        }
 //        personService.updatePerson(id, person);
 //        return "redirect:/admin/person";
