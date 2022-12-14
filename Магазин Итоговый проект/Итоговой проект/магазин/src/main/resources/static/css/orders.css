@@ -14,23 +14,23 @@ header{
     background-color:#ded5fb;
 }
 
-.cart{
+#cart{
     border-radius: 13px;
-    margin: 0px -60px 0px 100px;
+    margin: 0px -95px 0px 420px;
 
 }
 #orders{
     border-radius: 13px;
-    margin: 0px -40px 0px 0px;
+    margin: 0px -100px 0px 10px;
 
 }
 #password{
     border-radius: 13px;
-    margin: 0px -20px 0px 0px;
+    margin: 0px -25px 0px 10px;
 }
 #exit{
-    margin: 0px 0px 0px 0px;
-    border-radius: 13px;
+    margin: 0px -500px 0px 0px;
+    border-radius: 13px
 
 }
 #btn-product:hover {
@@ -63,20 +63,18 @@ header{
 
 }
 #product-row{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
     margin: 10px 10px;
-    padding: 5px  0px 5px 100px;
+    padding: 5px  5px 5px 5px;
     border-radius: 5px;
     box-shadow: 1px 1px 6px black;
     /*align-self: center;*/
 
 }
-#order_row{
+#order-row{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     margin: 10px 10px;
-    padding: 5px  0px 5px 100px;
+    padding: 5px  5px 5px 5px;
     border-radius: 5px;
     box-shadow: 1px 1px 6px black;
     /*align-self: center;*/
@@ -108,3 +106,14 @@ a {
     color: black;
     background-color:#a68ef5;
 }
+button{
+    box-shadow: 1px 1px 6px black;
+    margin: 5px 0px;
+    border-radius: 5px;
+    background-color:#a68ef5;
+}
+button:hover{
+    color: #5469d4;
+}
+
+

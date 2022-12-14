@@ -67,9 +67,9 @@ public class AuthController {
     public String changePasswordPersonal(@ModelAttribute("person") @Valid Person person,
                                          BindingResult bindingResult, Model model){
         personValidator.findUser(person, bindingResult);
-        if(!bindingResult.hasErrors()){
-        System.out.println("Верный логин");}
-        else if(bindingResult.hasErrors()) {
+        if(bindingResult.hasErrors()){
+        System.out.println("Нерный логин");}
+        else if(!bindingResult.hasErrors()) {
             model.addAttribute("login", SecurityContextHolder.getContext().getAuthentication().getName());
             return "/user/updatePassword";
         }

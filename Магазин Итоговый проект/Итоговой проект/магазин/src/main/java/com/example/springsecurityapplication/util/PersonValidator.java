@@ -34,7 +34,7 @@ public class PersonValidator implements Validator {
     public void findUser(Object target, Errors errors) {
         Person person = (Person) target;
         // Если метод по поиску пользователя по логину если равен 0 тогда такой логин не найден
-        if(personService.getPersonFindByLogin(person) == null){
+        if(personService.getPersonFindByLogin(person) != null){
             errors.rejectValue("login", "", "Логин не найден");
         }
         else System.out.println("Логин верный");

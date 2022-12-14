@@ -15,9 +15,12 @@
             <div id="LK" class="col-md-6 text-md-start text-sm-center text-center col-sm-12 col-12">
                 <h1>Shop</h1>
             </div>
-<form id="exit" class=" col-md-2 col-sm-12 col-12 text-center align-self-center">
-    <input id="btn-product" type="button" value="Вернуться назад" onclick="history.back()">
-</form>
+<!--            <form th:method="get" th:action="@{/product/product}" id="exit" class=" col-md-2 col-sm-12 col-12 text-center align-self-center">-->
+<!--                <input id="btn-product" type="submit" value="Вернуться назад">-->
+<!--            </form>-->
+            <form th:method="get" th:action="@{/auth/login}" id="exit" class=" col-md-2 col-sm-12 col-12 text-end align-self-center">
+                <input id="btn-product" type="submit" value="Авторизоваться">
+            </form>
         </div>
     </div>
 <br>
@@ -75,6 +78,7 @@
     <br>
                                     <a th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}" style="width:300px"></a>
                                     <p th:text="'Цена: ' + ${product.getPrice()}"  ></p>
+
                         </div>
                 </div>
     <hr>
@@ -84,8 +88,8 @@
                                    <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="300px">
     <br>
     <br>
-                                   <a  th:href="@{/product/info/{id}(id=${product.getId()})}"  th:text="${product.getTitle()}" style="width:300px"></a>
-                                   <p th:text="'Цена: ' + ${product.getPrice()}"  ></p>
+                                   <a  th:href="@{/product/info/{id}(id=${product.getId()})}"  th:text="${product.getTitle()}" id="title" style="width: 200px"></a>
+                                   <p th:text="'Цена: ' + ${product.getPrice()}"  style="width: 200px"></p>
                       </div>
                </div>
     </div>

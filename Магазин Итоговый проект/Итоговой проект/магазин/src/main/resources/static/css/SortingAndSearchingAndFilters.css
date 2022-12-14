@@ -1,0 +1,50 @@
+header{
+    background-color: #c79fef;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    box-shadow: 1px 1px 6px black;
+    margin: 0px 3px;
+    border-radius: 5px;
+
+}
+#btn-product{
+    box-shadow: 1px 1px 6px black;
+    margin: -3px 25px;
+    border-radius: 5px;
+    background-color:#ded5fb;
+}
+#list {
+    margin: 0px -100px 0px 500px;
+    border-radius: 13px;
+}
+#exit {
+    margin: 0px -500px 0px 100px;
+    border-radius: 13px;
+}
+.users{
+    box-shadow: 1px 1px 6px black;
+    margin: 20px 50px;
+    border-radius: 5px;
+
+}
+.form{
+    box-shadow: 1px 1px 6px black;
+    margin: 10px 50px;
+    padding: 20px 10px;
+    border-radius: 5px;
+}
+.result{
+    box-shadow: 1px 1px 6px black;
+    margin: 20px 50px 40px 50px;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+button{
+    box-shadow: 1px 1px 6px black;
+    margin: 5px 10px;
+    border-radius: 5px;
+    background-color:#a68ef5;
+}
+button:hover{
+    color: #5469d4;
+}

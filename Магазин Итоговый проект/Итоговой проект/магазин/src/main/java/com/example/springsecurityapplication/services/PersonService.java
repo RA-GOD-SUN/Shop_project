@@ -50,20 +50,7 @@ public class PersonService {
         Optional<Person> optionalPerson = personRepository.findById(id);
         return optionalPerson.orElse(null);
     }
-    // Данный метод позволяет получить пароль пользователя по id
-//    public Person getPasswordById( String password){
-//        Optional<Person> optionalPerson = personRepository.findByPassword( password);
-//        return optionalPerson.orElse(null);
-//    }
 
-
-    //    // Данный метод позволяет сохранить пользователя
-//    @Transactional
-//    public void savePerson(Person person){
-//        personRepository.save(person);
-//    }
-//
-//
     // Данный метод позволяет обновить данные пользователя пароль
     @Transactional
     public void changePassword(int id, String password){
@@ -86,6 +73,11 @@ public class PersonService {
         personRepository.deleteById(id);
     }
 
+    @Transactional
+    public void updatePersonRole(String role, Person person){
+        person.setRole(role);
+        personRepository.save(person);
+    }
 
     // Данный метод позволяет получить пользователя по email адресу
     public Person getPersonEmail(String email){

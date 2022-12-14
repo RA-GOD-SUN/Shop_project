@@ -30,8 +30,8 @@
     <div class="container"  style="justify-content: center" >
         <p style="font-size: 30px; font-family: Arial" th:text="${product.getTitle()}"  ></p>
         <div class="row row-cols-1 row-cols-md-5 g-4">
-            <div  th:each="img : ${product.getImageList()}">
-                <img th:src="'/img/' + ${img.getFileName()}" >
+            <div  th:each="img : ${product.getImageList()}" >
+                <img th:src="'/img/' + ${img.getFileName()}" width="240px">
             </div>
         </div>
         <br>

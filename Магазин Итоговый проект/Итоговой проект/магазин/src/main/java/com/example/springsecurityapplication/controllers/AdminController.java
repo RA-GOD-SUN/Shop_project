@@ -1,6 +1,5 @@
 package com.example.springsecurityapplication.controllers;
 
-import com.example.springsecurityapplication.enumm.Status;
 import com.example.springsecurityapplication.models.Image;
 import com.example.springsecurityapplication.models.Order;
 import com.example.springsecurityapplication.models.Person;
@@ -241,22 +240,32 @@ public class AdminController {
 
 
     // Метод возвращает страницу с формой редактирования пользователя и помещает в модель объект редактируемого пользователя по id
+    @SuppressWarnings("SpringMVCViewInspection")
     @GetMapping("/person/edit/{id}")
-    public String editPerson(@PathVariable("id")int id, Model model){
+    public String editPerson(@PathVariable("id") int id, Model model) {
         model.addAttribute("editPerson", personService.getPersonById(id));
         return "person/editPerson";
     }
 
-    // Метод принимает объект с формы и обновляет пользователя
+//    // Метод принимает объект с формы и обновляет пользователя
+//    @PostMapping("/person/edit/{id}")
+//    public String editPerson(@ModelAttribute("editPerson") @Valid Person person,BindingResult bindingResult, @PathVariable("id") int id){
+//        if(bindingResult.hasErrors()){
+//            return "/editPerson";
+//        }
+//        personService.updatePerson(id, person);
+//        return "redirect:/admin/person";
+//    }
+
+    // Метод принимает объект с формы и обновляет пользователю роль
     @PostMapping("/person/edit/{id}")
-    public String editPerson(@ModelAttribute("editPerson") @Valid Person person,BindingResult bindingResult, @PathVariable("id") int id){
-        if(bindingResult.hasErrors()){
-            return "person/editPerson";
-        }
-        personService.updatePerson(id, person);
+    public String editPersonRole(@ModelAttribute("editPerson") @Valid Person person, BindingResult bindingResult, @RequestParam("role") String role, @PathVariable("id") int id){
+        Person person_role = personService.getPersonById(id);
+//        person_role.setRole(role);
+        personService.updatePersonRole(role, person_role);
+
         return "redirect:/admin/person";
     }
-
 
 
     // Метод по удалению пользователей
@@ -297,12 +306,20 @@ public String ordersUsers(Model model){
 
 //поиск по номеру заказа
     @PostMapping("/orderList/search")
-    public String orderNumberSearch(@RequestParam("search") String search, @RequestParam("status") String status, Model model){
+    public String orderNumberSearch(@RequestParam("search") String search, Model model){
         if(search.length()>4){
             search = search.substring(search.length() - 4);
         }
         model.addAttribute("orders", orderService.findByLastFourCharacters(search));
         return "/admin/orderPerson";
+    }
+
+    //метод по отмене заказа у пользователя
+    @GetMapping("/order/cansel/{id}")
+    public String orderCansel(@ModelAttribute("orders") Order order, @PathVariable("id") int id){
+        Order order_status = orderService.getOrderById(id);
+        orderService.updateOrderCansel(order_status);
+        return "redirect:/orders";
     }
 
 //метод по отмене заказа
@@ -314,13 +331,6 @@ public String ordersUsers(Model model){
     }
 
 
-    //метод по отмене заказа у пользователя
-    @GetMapping("/order/cansel/{id}")
-    public String orderCansel(@ModelAttribute("orders") Order order, @PathVariable("id") int id){
-        Order order_status = orderService.getOrderById(id);
-        orderService.updateOrderCansel(order_status);
-        return "redirect:/orders";
-    }
 
     //метод заказ принят
     @GetMapping("/order/Accept/{id}")

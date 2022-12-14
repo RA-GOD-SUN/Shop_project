@@ -14,8 +14,11 @@
             <div id="LK" class="col-md-6 text-md-start text-sm-center text-center col-sm-12 col-12">
                 <h1>Shop</h1>
             </div>
-            <form id="exit" class=" col-md-2 col-sm-12 col-12 text-center align-self-center">
-                <input id="btn-product" type="button" value="Вернуться назад" onclick="history.back()">
+<!--            <form id="exit" class=" col-md-2 col-sm-12 col-12 text-center align-self-center">-->
+<!--                <input id="btn-product" type="button" value="Вернуться назад" onclick="history.back()">-->
+<!--            </form>-->
+            <form th:method="get" th:action="@{/auth/login}" id="exit" class=" col-md-2 col-sm-12 col-12 text-center align-self-center">
+                <input id="btn-product" type="submit" value="Вернуться назад">
             </form>
         </div>
     </div>
@@ -25,8 +28,8 @@
     <div class="container"  style="justify-content: center" >
          <p style="font-size: 30px; font-family: Arial" th:text="${product.getTitle()}"  ></p>
     <div class="row row-cols-1 row-cols-md-5 g-4">
-         <div  th:each="img : ${product.getImageList()}">
-         <img th:src="'/img/' + ${img.getFileName()}" >
+         <div  th:each="img : ${product.getImageList()}" >
+         <img th:src="'/img/' + ${img.getFileName()}" width="240px">
          </div>
     </div>
         <br>

@@ -10,12 +10,12 @@
 </head>
 <body>
 <header>
-    <div class="">
-        <div class="row col-sm-6 text-md-start text-sm-center text-center">
-            <div id="LK" class="col-md-2 text-md-start text-sm-center text-center col-sm-1 col-1">
+    <div class="container">
+        <div class="row col-sm-20 text-md-start text-sm-center text-center">
+            <div id="LK" class="col-md-4 text-md-start text-sm-center text-center col-sm-1 col-1">
                 <h1>Shop</h1>
             </div>
-            <div id="" class="cart col-2 align-self-center">
+            <div id="cart" class=" col-2 align-self-center">
                 <form method="get" th:action="@{/cart}">
                     <input id="btn-product" type="submit" value="Корзина">
                 </form>
@@ -31,8 +31,8 @@
                 </form>
             </div>
             <div id="exit"  class=" col-2 align-self-center">
-                <form th:method="POST" th:action="@{/logout}">
-                    <input id="btn-product" type="submit" value="Выйти из личного кабинета">
+                <form th:method="get" th:action="@{/index}">
+                    <input id="btn-product" type="submit" value="Назад в личный кабинет">
                 </form>
             </div>
         </div>
@@ -42,23 +42,26 @@
 
 <br>
 <br>
-<h3>Заказы</h3>
 
+<div id="product-row" class="main-column">
+    <h3 style="margin:10px; align-items: center ">Заказы:</h3>
 <div  class="row row-cols-1 row-cols-md-3 g-4" id="order-row">
 <!--    <form method="POST" th:action="@{/orderCansel/{id}(id=${order.getId()})}"  th:each="order : ${orders}" >-->
 <div th:each="order : ${orders}">
-    <h3 th:text="'Заказ № ' + ${order.getNumber()}"></h3>
+    <h3 class="title" th:text="'Заказ № ' + ${order.getNumber()}"></h3>
     <img th:src="'/img/' + ${order.getProduct().imageList[0].getFileName()}" width="300px">
+        <div class="title">
     <p th:text="'Наименование: ' + ${order.getProduct().getTitle()}"></p>
     <p th:text="'Количество: ' + ${order.getCount()}"></p>
     <p th:text="'Цена: ' + ${order.getPrice()}"></p>
     <p th:text="'Дата заказа: ' + ${#temporals.format(order.getDateTime(), 'dd-MMM-yyyy')}"></p>
     <p th:text="'Статус: ' + ${order.getStatus()}"></p>
 <!--    <button type="submit" th:disabled="${order.getStatus() eq T(com.example.springsecurityapplication.enumm.Status).values()[4]? true : false}">Отменить</button>-->
-    <a th:href="@{/admin/order/cansel/{id}(id=${order.getId()})}" ><button type="button" th:disabled="${order.getStatus() eq T(com.example.springsecurityapplication.enumm.Status).values()[4]? true : false}"><span class="span">Отменён</span></button></a>
+    <a th:href="@{/admin/order/cansel/{id}(id=${order.getId()})}" ><button type="button" th:disabled="${order.getStatus() eq T(com.example.springsecurityapplication.enumm.Status).values()[4]? true : false}"><span class="span">Отменить заказ</span></button></a>
     <hr>
+        </div>
 </div>
-
+</div>
 <!--</form>-->
 </div>
 
