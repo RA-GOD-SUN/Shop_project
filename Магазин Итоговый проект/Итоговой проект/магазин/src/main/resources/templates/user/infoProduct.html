@@ -19,8 +19,8 @@
                     <input id="btn-product" type="submit" value="Вернуться на главную страницу">
                 </form>
             </div>
-<!--            <form id="exit" class=" col-md-2 col-sm-12 col-12 text-center align-self-center">-->
-<!--                <input id="btn-product" type="button" value="Вернуться на главную страницу" onclick="history.back()">-->
+<!--            <form id="exit-start" class=" col-md-2 col-sm-12 col-12 text-center align-self-center">-->
+<!--                <input id="btn-product" type="button" value="Вернуться назад" onclick="history.back()">-->
 <!--            </form>-->
         </div>
     </div>
@@ -28,7 +28,7 @@
 </header>
 <form id="form" >
     <div class="container"  style="justify-content: center" >
-        <p style="font-size: 30px; font-family: Arial" th:text="${product.getTitle()}"  ></p>
+        <p style="font-size: 30px; font-family: Arial" th:href="@{/user/info/{id}(id=${product.getId()})}"  th:text="${product.getTitle()}"  ></p>
         <div class="row row-cols-1 row-cols-md-5 g-4">
             <div  th:each="img : ${product.getImageList()}" >
                 <img th:src="'/img/' + ${img.getFileName()}" width="240px">
@@ -40,9 +40,10 @@
         <p th:text="'Склад: ' + ${product.getWarehouse()}" ></p>
         <p th:text="'Продавец: ' + ${product.getSeller()}" ></p>
         <p th:text="'Категория: ' + ${product.getCategory().getName()}" ></p>
-        <form  method="get" th:action="@{/cart/add/{id}(id=${product.getId()})}">
-            <button id="addCart" type="submit" >Добавить в корзину</button>
-        </form>
+<!--        <form  method="get" th:action="@{/cart/add/{id}(id=${product.getId()})}">-->
+<!--            <button id="addCart" type="submit" >Добавить в корзину</button>-->
+<!--        </form>-->
+
         <hr>
 
 
